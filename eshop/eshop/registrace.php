@@ -10,7 +10,8 @@ include_once 'header.php';
 <input type="text" name="email" placeholder="Email">
 <input type="password" name="pwd" placeholder="Heslo">
 <input type="password" name="pwdrep" placeholder="Heslo znovu">
-<button>Zaregistrovat se</button>
+    <button  type="submit" name="submit">Zaregistrovat
+        se</button>
 </form>
 </div>
 <?php

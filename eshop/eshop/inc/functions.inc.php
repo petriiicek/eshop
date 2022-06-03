@@ -72,7 +72,7 @@ function uidExists($conn, $username, $email) {
 
 function createUser($conn, $name, $email, $username, $pwd) {
 
-    $sql = "INSERT INTO users (usersName, usersEmail, usersUid, usersPwd) VALUE (?, ?, ?, ?);";
+    $sql = "INSERT INTO users (usersName, usersEmail, usersUid, usersPwd, usersType) VALUE (?, ?, ?, ?, 'user');";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../registrace.php?error=stmtfailed");
@@ -118,6 +118,7 @@ function loginUser($conn, $username, $pwd) {
         session_start();
         $_SESSION["userid"] = $uidExists["usersId"];
         $_SESSION["useruid"] = $uidExists["usersUid"];
+        $_SESSION["usersType"] = $uidExists["usersType"];
         header("location: ../index.php");
         exit();
 

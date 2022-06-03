@@ -49,7 +49,11 @@ if(!$conn) {
                             </ul>
                             <?php
                                 if(isset($_SESSION["useruid"])){
-                                    echo "<li class='nav-item'><a class='nav-link' href='profile.php'>Účet</a></li>";
+                                    if ($_SESSION["usersType"] == "admin"){
+                                        echo "<li class='nav-item'><a class='nav-link' href='admin.php'>Adminstrace</a></li>";
+                                    } else if ($_SESSION["usersType"] == "user"){
+                                        echo "<li class='nav-item'><a class='nav-link' href='profile.php'>Účet</a></li>";
+                                    }
                                     echo "<li class='nav-item'><a class='nav-link' href='inc/Logout.inc.php'>Odhlásit se</a></li>";
                                 }
                                 else{
@@ -62,16 +66,22 @@ if(!$conn) {
                         </li>
                     </ul>
                     <form class="d-flex">
-                    <?php
+                    <?php /*
       
                     $select_rows = mysqli_query($conn, "SELECT * FROM `cart`") or die('query failed');
                     $row_count = mysqli_num_rows($select_rows);
 
-                    ?>
-                        <button class="btn btn-outline-dark" type="submit">
-                        <a href="cart.php" class="bi-cart-fill me-1">Košík <span class="badge bg-dark text-white ms-1 rounded-pill"><?php echo $row_count; ?></span> </a>
-                        </button>
-                      
+                    */ ?>
+                        <?php
+                        if (isset($_SESSION["useruid"])){
+                            if ($_SESSION["usersType"] == "user") {
+                                echo "<button class='btn btn-outline-dark' type='submit'>";
+                                echo "<a href='cart.php' class='bi-cart-fill me-1'>Košík <span class='badge bg-dark text-white ms-1 rounded-pill'><?php echo $row_count; ?></span> </a>";
+                                echo "</button>";
+                            }
+                        }
+                        ?>
+
                     </form>
                 </div>
             </div>
